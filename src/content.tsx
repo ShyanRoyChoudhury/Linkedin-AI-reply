@@ -1,10 +1,10 @@
 import cssText from "data-text:~style.css"
 import type { PlasmoCSConfig } from "plasmo"
-import { useRef, useState } from "react"
+import { useState } from "react"
 
-import ButtonIcon from "~ButtonSVG"
 import { CountButton } from "~features/CountButton"
 import IconButton from "~features/IconButton"
+import MessageModal from "~features/MessageModal"
 import PromptModal from "~features/PromptModal"
 import { useChatFocus } from "~hooks/useChatFocus"
 
@@ -34,13 +34,18 @@ const PlasmoOverlay = () => {
         }}>
         <IconButton />
       </div>
+
+      {/* {isMessagePanelActive && (
+        <MessageModal
+          isMessagePanelActive={isMessagePanelActive}
+          setModalOpen={setModalOpen}
+        />
+      )} */}
       <div className="z-50 flex fixed top-0 right-8">
         <CountButton />
       </div>
       <div className="z-50 flex justify-center h-screen w-screen items-center">
-        <PromptModal isOpen={isModalOpen} setModalOpen={setModalOpen}>
-          messages
-        </PromptModal>
+        <PromptModal isOpen={isModalOpen} setModalOpen={setModalOpen} />
       </div>
     </div>
   )
