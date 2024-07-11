@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 
 export const useFocusMonitor = () => {
+  // const [isModalOpen, setModalOpen] = useState(false)
   const [isMessagePanelActive, setMessagePanelActive] = useState(false)
   const [activeInputElement, setActiveInputElement] = useState()
   const handleFocus = useCallback((element) => {
@@ -60,5 +61,11 @@ export const useFocusMonitor = () => {
     }
   }, [handleFocus, handleBlur])
 
-  return { isMessagePanelActive, setMessagePanelActive, activeInputElement }
+  return {
+    isMessagePanelActive,
+    setMessagePanelActive,
+    activeInputElement
+    // isModalOpen,
+    // setModalOpen
+  }
 }

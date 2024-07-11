@@ -10,6 +10,7 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@plasmohq/storage": "^1.11.0",
     "plasmo": "0.88.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -30,7 +31,8 @@
       "https://*/*"
     ],
     "permissions": [
-      "scripting"
+      "scripting",
+      "storage"
     ]
   }
 }

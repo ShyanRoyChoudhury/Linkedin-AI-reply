@@ -1,12 +1,15 @@
 import { useRef, useState } from "react"
 
+import { useModalState } from "~contents/content"
 import { useFocusMonitor } from "~hooks/useFocusMonitor"
 
 import Icon from "../IconSVG"
 
-function IconButton({ setModalOpen }) {
+function IconButton() {
   //const isMessagePanelActive = useFocusMonitor(formRef);
   const { isMessagePanelActive, setMessagePanelActive } = useFocusMonitor()
+  const [, setModalOpen] = useModalState()
+
   const handleClick = () => {
     const activeElement = document.activeElement
     setModalOpen(true)

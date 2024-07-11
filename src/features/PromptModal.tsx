@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from "react"
 
+import { useModalState } from "~contents/content"
 import { useFocusMonitor } from "~hooks/useFocusMonitor"
 import InsertIcon from "~InsertSVG"
 
 import ButtonIcon from "../ButtonSVG"
 
-function PromptModal({ isOpen, setModalOpen }) {
+function PromptModal() {
   // const prompts = []
   const [userPrompt, setUserPrompt] = useState("")
   const [generatedResponse, setGeneratedResponse] = useState("")
   const [input, setInput] = useState<string>("")
   const { activeInputElement } = useFocusMonitor() as any
-
+  const [isModalOpen, setModalOpen] = useModalState()
   const closeModal = () => {
-    const isModalOpen = !isOpen
-    setModalOpen(isModalOpen)
+    const isOpen = !isModalOpen
+    setModalOpen(isOpen)
   }
 
-  useEffect(() => {}, [activeInputElement])
+  useEffect(() => {
+    console.log("modal")
+    console.log(isModalOpen)
+  }, [])
   const handleGenerate = () => {
     // setPromptsList((prevPrompts) => [...prevPrompts, prompt])
     const response =
@@ -65,7 +69,7 @@ function PromptModal({ isOpen, setModalOpen }) {
       closeModal()
     }
   }
-  if (!isOpen) return null
+  if (!isModalOpen) return null
 
   return (
     <div
