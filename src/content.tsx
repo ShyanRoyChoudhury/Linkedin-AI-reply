@@ -2,11 +2,8 @@ import cssText from "data-text:~style.css"
 import type { PlasmoCSConfig } from "plasmo"
 import { useState } from "react"
 
-import { CountButton } from "~features/CountButton"
 import IconButton from "~features/IconButton"
-import MessageModal from "~features/MessageModal"
 import PromptModal from "~features/PromptModal"
-import { useChatFocus } from "~hooks/useChatFocus"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://*.linkedin.com/*"]
@@ -19,34 +16,13 @@ export const getStyle = () => {
 }
 
 const PlasmoOverlay = () => {
-  const [isModalOpen, setModalOpen] = useState<boolean>(false)
-
-  const isMessagePanelActive = useChatFocus()
-  // if(!isMessagePanelActive) return ();
-
+  const [isModalOpen, setModalOpen] = useState(false)
   return (
     <div>
-      <div
-        className="z-50 flex fixed bottom-0 "
-        onClick={() => {
-          console.log("clicked")
-          setModalOpen(true)
-        }}>
-        <IconButton />
-      </div>
-
-      {/* {isMessagePanelActive && (
-        <MessageModal
-          isMessagePanelActive={isMessagePanelActive}
-          setModalOpen={setModalOpen}
-        />
-      )} */}
-      <div className="z-50 flex fixed top-0 right-8">
-        <CountButton />
-      </div>
       <div className="z-50 flex justify-center h-screen w-screen items-center">
         <PromptModal isOpen={isModalOpen} setModalOpen={setModalOpen} />
       </div>
+      <IconButton setModalOpen={setModalOpen} />
     </div>
   )
 }
