@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { useFocusMonitor } from "~hooks/useFocusMonitor"
 import InsertIcon from "~InsertSVG"
@@ -9,7 +9,7 @@ function PromptModal({ isOpen, setModalOpen }) {
   // const prompts = []
   const [userPrompt, setUserPrompt] = useState("")
   const [generatedResponse, setGeneratedResponse] = useState("")
-  const [prompt, setPrompt] = useState<string>("")
+  const [input, setInput] = useState<string>("")
   const { activeInputElement } = useFocusMonitor() as any
 
   const closeModal = () => {
@@ -23,12 +23,11 @@ function PromptModal({ isOpen, setModalOpen }) {
     const response =
       "Thank you for the opportunity! If you have any more questions or if there's anything else I can help you with, feel free to ask."
     setGeneratedResponse(response)
-    setUserPrompt(prompt)
-    setPrompt("")
+    setUserPrompt(input)
+    setInput("")
   }
 
   const handleInsert = () => {
-    // const activeElement = document.activeElement
     if (
       activeInputElement.target &&
       activeInputElement.target.classList.contains("msg-form__contenteditable")
@@ -36,27 +35,24 @@ function PromptModal({ isOpen, setModalOpen }) {
       const contentEditableDiv = activeInputElement.target
 
       // Set the value of the contenteditable div
-      const valueToSet = generatedResponse // Replace with your value
+      const valueToSet = generatedResponse
 
       // Clear existing content, including placeholder
       contentEditableDiv.innerHTML = ""
 
-      // Insert the generated response as a paragraph (similar to the original placeholder structure)
+      // Insert the generated response as a paragraph
       const p = document.createElement("p")
       p.textContent = valueToSet
       contentEditableDiv.appendChild(p)
 
-      // Dispatch input and change events to ensure any listeners are triggered
       const inputEvent = new Event("input", { bubbles: true })
       const changeEvent = new Event("change", { bubbles: true })
 
       contentEditableDiv.dispatchEvent(inputEvent)
       contentEditableDiv.dispatchEvent(changeEvent)
-
-      // Optionally focus the contenteditable div to simulate user interaction
       contentEditableDiv.focus()
 
-      // Simulate Enter key press to send the message (if required by the platform)
+      // Simulate Enter key press to send the message
       const enterEvent = new KeyboardEvent("keydown", {
         bubbles: true,
         cancelable: true,
@@ -66,6 +62,7 @@ function PromptModal({ isOpen, setModalOpen }) {
         which: 13
       })
       setGeneratedResponse("")
+      closeModal()
     }
   }
   if (!isOpen) return null
@@ -95,9 +92,9 @@ function PromptModal({ isOpen, setModalOpen }) {
           <input
             placeholder="Your Prompt"
             type="text"
-            value={prompt}
+            value={input}
             className="rounded-md focus:outline-none p-1 text-md w-full bg-white border text-[#666D80]"
-            onChange={(e) => setPrompt(e.target.value)}
+            onChange={(e) => setInput(e.target.value)}
           />
           <div className="flex justify-end">
             {generatedResponse !== "" ? (
@@ -118,7 +115,7 @@ function PromptModal({ isOpen, setModalOpen }) {
             ) : (
               <button
                 onClick={() => {
-                  if (prompt !== "") handleGenerate()
+                  if (input !== "") handleGenerate()
                 }}
                 className=" text-white bg-[#3B82F6]  active:scale-105 hover:bg-[#76a6f2]  transition-all rounded-md text-md flex space-x-1 px-4 py-2 items-center font-medium">
                 <ButtonIcon />

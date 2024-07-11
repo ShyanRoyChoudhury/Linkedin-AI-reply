@@ -7,14 +7,15 @@ export const useFocusMonitor = () => {
     setMessagePanelActive(true)
     setActiveInputElement(element)
   }, [])
-  const handleBlur = useCallback(() => {
+  const handleBlur = useCallback((event) => {
+    const relatedTarget = event.relatedTarget as HTMLElement | null
+    console.log(relatedTarget)
+    if (relatedTarget && relatedTarget.classList.contains("icon-button")) {
+      return
+    }
     setMessagePanelActive(false)
     // setActiveInputElement(null)
   }, [])
-
-  useEffect(() => {
-    // console.log(isMessagePanelActive);
-  }, [isMessagePanelActive])
 
   useEffect(() => {
     const addListeners = (element: HTMLElement) => {
@@ -59,5 +60,5 @@ export const useFocusMonitor = () => {
     }
   }, [handleFocus, handleBlur])
 
-  return { isMessagePanelActive, activeInputElement }
+  return { isMessagePanelActive, setMessagePanelActive, activeInputElement }
 }
