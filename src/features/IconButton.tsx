@@ -1,7 +1,5 @@
-import { useRef, useState } from "react"
-
-import { useModalState } from "~contents/content"
 import { useFocusMonitor } from "~hooks/useFocusMonitor"
+import { useModalState } from "~hooks/useModalState"
 
 import Icon from "../IconSVG"
 
@@ -11,22 +9,22 @@ function IconButton() {
   const [, setModalOpen] = useModalState()
 
   const handleClick = () => {
-    const activeElement = document.activeElement
+    // const activeElement = document.activeElement
     setModalOpen(true)
     console.log("button clicked")
-    setTimeout(() => {
-      if (activeElement) {
-        // @ts-ignore
-        activeElement.focus()
-      }
-    }, 0)
+    // setTimeout(() => {
+    //   if (activeElement) {
+    //     // @ts-ignore
+    //     activeElement.focus()
+    //   }
+    // }, 0)
     setMessagePanelActive(false)
   }
   return (
     isMessagePanelActive && (
       <span className={` max-w-md rounded-lg mx-auto bg-white`}>
         <span
-          className={` rounded-lg p-4 fixed hover:scale-105 bg-white left-0 bottom-0 overflow-hidden`}>
+          className={` rounded-lg p-4 fixed hover:scale-105 bg-white left-0 bottom-0 `}>
           {
             <button
               type="button"

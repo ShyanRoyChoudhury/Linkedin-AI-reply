@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
-import { useModalState } from "~contents/content"
 import { useFocusMonitor } from "~hooks/useFocusMonitor"
+import { useModalState } from "~hooks/useModalState"
 import InsertIcon from "~InsertSVG"
 
 import ButtonIcon from "../ButtonSVG"
@@ -23,7 +23,6 @@ function PromptModal() {
     console.log(isModalOpen)
   }, [])
   const handleGenerate = () => {
-    // setPromptsList((prevPrompts) => [...prevPrompts, prompt])
     const response =
       "Thank you for the opportunity! If you have any more questions or if there's anything else I can help you with, feel free to ask."
     setGeneratedResponse(response)

@@ -1,8 +1,6 @@
 import cssText from "data-text:~style.css"
 import type { PlasmoCSConfig, PlasmoGetOverlayAnchor } from "plasmo"
-import { useState } from "react"
 
-// import IconButton from "~features/IconButton"
 import PromptModal from "~features/PromptModal"
 
 export const config: PlasmoCSConfig = {
@@ -15,11 +13,7 @@ export const getStyle = () => {
   return style
 }
 
-// export const getOverlayAnchor: PlasmoGetOverlayAnchor = async () =>
-//   document.querySelector('[aria-label="Messaging"]')
-
 const PlasmoOverlay = () => {
-  //   const [isModalOpen, setModalOpen] = useState(false)
   return (
     <div>
       <div className="z-50 ">

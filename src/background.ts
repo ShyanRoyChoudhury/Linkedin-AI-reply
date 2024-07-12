@@ -16,6 +16,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     storage.get("modalState").then((isOpen) => {
       sendResponse({ isOpen })
     })
-    return true // Indicates that the response is sent asynchronously
+    return true
   }
 })

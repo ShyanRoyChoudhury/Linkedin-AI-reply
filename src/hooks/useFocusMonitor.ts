@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 
 export const useFocusMonitor = () => {
-  // const [isModalOpen, setModalOpen] = useState(false)
   const [isMessagePanelActive, setMessagePanelActive] = useState(false)
   const [activeInputElement, setActiveInputElement] = useState()
   const handleFocus = useCallback((element) => {
@@ -10,13 +9,13 @@ export const useFocusMonitor = () => {
   }, [])
   const handleBlur = useCallback((event) => {
     const relatedTarget = event.relatedTarget as HTMLElement | null
-    console.log(relatedTarget)
     if (relatedTarget && relatedTarget.classList.contains("icon-button")) {
       return
     }
     setMessagePanelActive(false)
-    // setActiveInputElement(null)
   }, [])
+
+  useEffect(() => console.log(isMessagePanelActive), [isMessagePanelActive])
 
   useEffect(() => {
     const addListeners = (element: HTMLElement) => {
@@ -65,7 +64,5 @@ export const useFocusMonitor = () => {
     isMessagePanelActive,
     setMessagePanelActive,
     activeInputElement
-    // isModalOpen,
-    // setModalOpen
   }
 }
