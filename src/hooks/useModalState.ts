@@ -9,7 +9,11 @@ export const useModalState = () => {
 
   useEffect(() => {
     const updateModalState = async () => {
-      setModalOpen((await storage.get("modalState")) || false)
+      try{
+        setModalOpen((await storage.get("modalState")) || false)
+      } catch (e){
+        console.log('failed to get modal state from storage', e)
+      }
     }
 
     const messageListener = (message) => {
@@ -25,8 +29,13 @@ export const useModalState = () => {
     }
   }, [])
   const updateModalState = (newState: boolean) => {
-    setModalOpen(newState)
-    chrome.runtime.sendMessage({ type: "SET_MODAL_STATE", isOpen: newState })
+    try{
+
+      setModalOpen(newState)
+      chrome.runtime.sendMessage({ type: "SET_MODAL_STATE", isOpen: newState })
+    } catch (e) {
+      console.log('failed to set modal state in storage', e)
+    }
   }
 
   return [isModalOpen, updateModalState] as const

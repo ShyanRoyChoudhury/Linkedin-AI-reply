@@ -31,43 +31,47 @@ function PromptModal() {
   }
 
   const handleInsert = () => {
-    if (
-      activeInputElement.target &&
-      activeInputElement.target.classList.contains("msg-form__contenteditable")
-    ) {
-      const contentEditableDiv = activeInputElement.target
+    try{
+      if (
+        activeInputElement.target &&
+        activeInputElement.target.classList.contains("msg-form__contenteditable")
+      ) {
+        const contentEditableDiv = activeInputElement.target
 
-      // Set the value of the contenteditable div
-      const valueToSet = generatedResponse
+        // Set the value of the contenteditable div
+        const valueToSet = generatedResponse
 
-      // Clear existing content, including placeholder
-      contentEditableDiv.innerHTML = ""
+        // Clear existing content, including placeholder
+        contentEditableDiv.innerHTML = ""
 
-      // Insert the generated response as a paragraph
-      const p = document.createElement("p")
-      p.textContent = valueToSet
-      contentEditableDiv.appendChild(p)
+        // Insert the generated response as a paragraph
+        const p = document.createElement("p")
+        p.textContent = valueToSet
+        contentEditableDiv.appendChild(p)
 
-      const inputEvent = new Event("input", { bubbles: true })
-      const changeEvent = new Event("change", { bubbles: true })
+        const inputEvent = new Event("input", { bubbles: true })
+        const changeEvent = new Event("change", { bubbles: true })
 
-      contentEditableDiv.dispatchEvent(inputEvent)
-      contentEditableDiv.dispatchEvent(changeEvent)
-      contentEditableDiv.focus()
+        contentEditableDiv.dispatchEvent(inputEvent)
+        contentEditableDiv.dispatchEvent(changeEvent)
+        contentEditableDiv.focus()
 
-      // Simulate Enter key press to send the message
-      const enterEvent = new KeyboardEvent("keydown", {
-        bubbles: true,
-        cancelable: true,
-        key: "Enter",
-        code: "Enter",
-        keyCode: 13,
-        which: 13
-      })
-      setGeneratedResponse("")
-      closeModal()
+        // Simulate Enter key press to send the message
+        const enterEvent = new KeyboardEvent("keydown", {
+          bubbles: true,
+          cancelable: true,
+          key: "Enter",
+          code: "Enter",
+          keyCode: 13,
+          which: 13
+        })
+        setGeneratedResponse("")
+        closeModal()
+      }
+    } catch(e){
+        console.log('failed to insert response')
+      }
     }
-  }
   if (!isModalOpen) return null
 
   return (
