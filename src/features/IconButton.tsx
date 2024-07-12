@@ -1,7 +1,7 @@
 import { useFocusMonitor } from "~hooks/useFocusMonitor"
 import { useModalState } from "~hooks/useModalState"
 
-import Icon from "../IconSVG"
+import Icon from "~svgs/IconSVG"
 
 function IconButton() {
   //const isMessagePanelActive = useFocusMonitor(formRef);
@@ -9,15 +9,7 @@ function IconButton() {
   const [, setModalOpen] = useModalState()
 
   const handleClick = () => {
-    // const activeElement = document.activeElement
     setModalOpen(true)
-    console.log("button clicked")
-    // setTimeout(() => {
-    //   if (activeElement) {
-    //     // @ts-ignore
-    //     activeElement.focus()
-    //   }
-    // }, 0)
     setMessagePanelActive(false)
   }
   return (

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react"
 
 import { useFocusMonitor } from "~hooks/useFocusMonitor"
 import { useModalState } from "~hooks/useModalState"
-import InsertIcon from "~InsertSVG"
+import InsertIcon from "~svgs/InsertSVG"
 
-import ButtonIcon from "../ButtonSVG"
+import ButtonIcon from "~svgs/ButtonSVG"
 
 function PromptModal() {
   // const prompts = []
