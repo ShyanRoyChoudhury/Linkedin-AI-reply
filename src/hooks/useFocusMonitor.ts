@@ -8,14 +8,18 @@ export const useFocusMonitor = () => {
     setActiveInputElement(element)
   }, [])
   const handleBlur = useCallback((event) => {
-    const relatedTarget = event.relatedTarget as HTMLElement | null
-    if (relatedTarget && relatedTarget.classList.contains("plasmo-csui-container")) {
-      return
+    
+    const relatedTarget = event.relatedTarget as HTMLElement | null;
+
+    if (relatedTarget && relatedTarget.shadowRoot) {
+      if (relatedTarget.shadowRoot.querySelector('.plasmo-csui-container')) {
+        return
+      }
     }
     setMessagePanelActive(false)
   }, [])
 
-  useEffect(() => console.log(isMessagePanelActive), [isMessagePanelActive])
+
 
   useEffect(() => {
     const addListeners = (element: HTMLElement) => {
@@ -47,7 +51,6 @@ export const useFocusMonitor = () => {
     })
 
     observer.observe(document.body, { childList: true, subtree: true })
-    // console.log('state:', isMessagePanelActive);
 
     // Clean up the observer when the component unmounts
     return () => {
