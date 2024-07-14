@@ -13,12 +13,12 @@ function IconButton() {
     setMessagePanelActive(false)
   }
   return (
-(
+    isMessagePanelActive && (
         <button
           type="button"
           onClick={handleClick}
           tabIndex={0}
-          className="icon-button anchor rounded-full transition-all border-none shadow-lg hover:shadow-md active:scale-105 outline-none"
+          className="anchor rounded-full transition-all border-none shadow-lg hover:shadow-md active:scale-105 outline-none"
         >
           <Icon className="w-5 h-5" />
         </button>
