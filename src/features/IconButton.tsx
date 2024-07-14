@@ -13,24 +13,17 @@ function IconButton() {
     setMessagePanelActive(false)
   }
   return (
-    isMessagePanelActive && (
-      <span className={` max-w-md rounded-lg mx-auto bg-white`}>
-        <span
-          className={` rounded-lg p-4 fixed hover:scale-105 bg-white left-0 bottom-0 `}>
-          {
-            <button
-              type="button"
-              onClick={handleClick}
-              className="icon-button  rounded-full transition-all border-none
-          shadow-lg hover:shadow-md
-          active:scale-105 bg-slate-50 hover:bg-slate-100 hover:text-slate-900">
-              <Icon />
-            </button>
-          }
-        </span>
-      </span>
+(
+        <button
+          type="button"
+          onClick={handleClick}
+          tabIndex={0}
+          className="icon-button anchor rounded-full transition-all border-none shadow-lg hover:shadow-md active:scale-105 outline-none"
+        >
+          <Icon className="w-5 h-5" />
+        </button>
     )
-  )
+)
 }
 
 export default IconButton

@@ -1,55 +1,46 @@
-import { createRoot } from "react-dom/client"
-
+import cssText from "data-text:~style.css"
+import type { PlasmoCSConfig } from "plasmo"
 import IconButton from "~features/IconButton"
 
-export const getRootContainer = (): Promise<Element> =>
-  new Promise((resolve, reject) => {
-    const checkInterval = setInterval(() => {
-      try {
-        const rootContainer = document.querySelector(
-          '[aria-label="Write a message…"]'
-        )
-        if (rootContainer && rootContainer.children[0]) {
-          clearInterval(checkInterval)
-          resolve(rootContainer.children[0])
-        }
-      } catch (error) {
-        clearInterval(checkInterval)
-        reject(new Error("Failed to find the root container."))
-      }
-    }, 100)
+export const config: PlasmoCSConfig = {
+  matches: ["https://*.linkedin.com/*"]
+}
+
+export const getStyle = () => {
+  const style = document.createElement("style")
+  style.textContent = `
+  .anchor {
+    anchor-name: --testanchor;
+    border: none;
+    outline: none;
+  }
+  .anchor-target {
+    position-anchor: --anchortome;
+  position: absolute;
+  inset-area: top span-all;
+  }
+  
+  ` 
+  return style
+}
+
+import type { PlasmoGetOverlayAnchorList } from "plasmo"
+ 
+export const getOverlayAnchorList: PlasmoGetOverlayAnchorList = async () =>{
+  const root = document.querySelectorAll('[aria-label="Write a message…"]')
+
+  root.forEach((element) => {
+    element.classList.add("anchor-target") 
   })
+
+  return root
+}
 
 
 const App = () => {
   return (
-    <span
-      style={{
-        position: "absolute",
-        bottom: "35px",
-        right: "40px",
-        zIndex: 1000
-      }}>
-      <IconButton />
-    </span>
+        <IconButton />
   )
 }
 
-// // Store the root instance
-let rootInstance = null
-
-export const render = async ({ createRootContainer }) => {
-  try{
-    
-  const rootContainer = await createRootContainer()
-
-  // Check if root instance already exists
-  if (!rootInstance) {
-    rootInstance = createRoot(rootContainer)
-  }
-
-  rootInstance.render(<App />)
-} catch(e){
-  console.error('Error rendering content:', e.error)
-}
-}
+export default App;

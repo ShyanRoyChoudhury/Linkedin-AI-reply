@@ -9,7 +9,7 @@ export const useFocusMonitor = () => {
   }, [])
   const handleBlur = useCallback((event) => {
     const relatedTarget = event.relatedTarget as HTMLElement | null
-    if (relatedTarget && relatedTarget.classList.contains("icon-button")) {
+    if (relatedTarget && relatedTarget.classList.contains("plasmo-csui-container")) {
       return
     }
     setMessagePanelActive(false)
@@ -32,7 +32,7 @@ export const useFocusMonitor = () => {
       for (const mutation of mutations) {
         if (mutation.type === "childList") {
           const chatWindows = document.querySelectorAll(
-            ".msg-overlay-conversation-bubble"
+            ".msg-form__msg-content-container"
           )
           chatWindows.forEach((chatWindow) => {
             const messageInput = chatWindow.querySelector(
